@@ -12,11 +12,14 @@ h1 {
 
 .box {
   max-width: 400px;
-  margin: 50px auto;
+  width: 100%;
+  margin: 0 auto;
   background: white;
   border-radius: 5px;
   box-shadow: 5px 5px 15px -5px rgba(0, 0, 0, 0.3);
+  overflow: hidden;
 }
+
 
 #heading {
   background-color: #A683E3;
@@ -24,11 +27,27 @@ h1 {
 }
 
 .item {
-  min-height: 70px;
   display: flex;
   align-items: center;
   border-bottom: 1px solid #F1F1F1;
+  padding-right: 10px;
+  overflow: hidden;              
 }
+
+
+
+.item p {
+  margin: 0;
+  padding: 20px;
+  font-size: 20px;
+  font-weight: 200;
+  color: #00204a;
+  overflow-wrap: break-word;       
+  word-break: break-word;          
+  white-space: normal;             
+  max-width: 100%;                 
+}
+
 
 .item:last-child {
   border-bottom: 0;
@@ -93,4 +112,7 @@ footer {
   color: white;
   color: rgba(0, 0, 0, 0.5);
   text-align: center;
+  margin-top: 40px;
 }
+
+
