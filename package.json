@@ -1,0 +1,25 @@
+{
+  "name": "todolist",
+  "version": "1.0.0",
+  "description": "This is a To-do-list Project using everything i have learned till now...",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/abdullahej5411/ToDoList.git"
+  },
+  "author": "Muhammad Abdullah",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/abdullahej5411/ToDoList/issues"
+  },
+  "homepage": "https://github.com/abdullahej5411/ToDoList#readme",
+  "dependencies": {
+    "body-parser": "^2.2.0",
+    "ejs": "^3.1.10",
+    "express": "^5.1.0",
+    "nodemon": "^3.1.10"
+  }
+}
