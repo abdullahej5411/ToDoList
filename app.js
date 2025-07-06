@@ -51,7 +51,7 @@ app.post("/work", function(req, res){
       workItems.push(item);
   }
 
-  ews.redirect("/work");
+  res.redirect("/work");
 });
 
 app.listen(3000, () => {
