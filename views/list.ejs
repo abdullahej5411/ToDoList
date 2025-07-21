@@ -1,15 +1,17 @@
-<%- include("header") -%>
+<!DOCTYPE html>
+<html lang="en">
 
-<div class="box" id="heading">
-    <h1>
-        <%= listTitle %>!
-    </h1>
-</div>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>To Do List</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,100..900;1,100..900&family=Roboto:wght@100;300;400&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+ 
 
-<<<<<<< HEAD
-<div class="box">
-    <% for (var i=0; i < newListItems.length; i++) { %>
-=======
 <style>
   .checkbox-wrapper-19 {
     box-sizing: border-box;
@@ -163,7 +165,6 @@
     -webkit-animation: dothatopcheck-19 0.4s ease 0s forwards;
     animation: dothatopcheck-19 0.4s ease 0s forwards;
   }
-
 </style>
 
 <body>
@@ -172,23 +173,42 @@
     </div>
 
     <div class="box">
-    <% for (var i = 0; i < newListItems.length; i++) { %>
->>>>>>> caf597c (added a line through effect)
-        <div class="item">
-            <div class="checkbox-wrapper-19">
-                <input type="checkbox" id="cbtest-<%= i %>">
-                <label for="cbtest-<%= i %>" class="check-box"></label>
-            </div>
-            <p>
-                <%= newListItems[i] %>
-            </p>
-        </div>
-        <% } %>
+<% for (var i = 0; i < newListItems.length; i++) { %>
+  <form class="item" method="POST" action="/toggle">
+    <input type="hidden" name="index" value="<%= i %>">
+    <input type="hidden" name="listType" value="<%= listTitle === 'Work' ? 'Work' : '' %>">
 
-            <form class="item" action="/" method="post">
-                <input type="text" name="newItem" placeholder="New Item" autocomplete="off" required>
-                <button type="submit" name="list" value=<%=listTitle %> >+</button>
-            </form>
-</div>
+    <div class="item">
+      <div class="checkbox-wrapper-19">
+        <input
+          type="checkbox"
+          id="cbtest-<%= i %>"
+          name="completed"
+          onchange="this.form.submit()"
+          <%= newListItems[i].completed ? "checked" : "" %>
+        >
+        <!-- Add `checked` class here so CSS doesn't animate -->
+        <label for="cbtest-<%= i %>" class="check-box <%= newListItems[i].completed ? 'checked' : '' %>"></label>
+      </div>
+      <p style="<%= newListItems[i].completed ? 'text-decoration: line-through;' : '' %>">
+        <%= newListItems[i].name %>
+      </p>
+    </div>
+  </form>
+<% } %>
 
-<%- include("footer") -%>
+
+
+    <form class="item" action="/" method="post">
+        <input type="text" name="newItem" placeholder="New Item" autocomplete="off" required>
+        <button type="submit" name="list" value=<%= listTitle %> >+</button>
+    </form> 
+    </div>
+
+
+
+<footer>Copyrights @2025    </footer>
+
+</body>
+
+</html>

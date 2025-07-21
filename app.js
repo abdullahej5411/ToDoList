@@ -2,64 +2,63 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const app = express();
 
-var items = ["Buy Food.", "Go to Gym.", "Go to Sleep."];
-var workItems=[];
+let items = [
+  { name: "Buy Food.", completed: false },
+  { name: "Go to Gym.", completed: false },
+  { name: "Go to Sleep.", completed: false }
+];
+let workItems = [];
 
-app.use(bodyParser.urlencoded({extended:true}));
-app.use(express.static("public"));  
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(express.static("public"));
 
 app.set('view engine', 'ejs');
+
 app.get('/', (req, res) => {
-    var today = new Date();
-    var options={
-        weekday:"long",
-        day:"numeric",
-        month:"long"
-    };
-    var day = today.toLocaleDateString("en-US", options);
-
-  res.render("list", {listTitle: day, newListItems: items});
+  let today = new Date();
+  let options = {
+    weekday: "long",
+    day: "numeric",
+    month: "long"
+  };
+  let day = today.toLocaleDateString("en-US", options);
+  res.render("list", { listTitle: day, newListItems: items });
 });
 
-app.post("/", function(req, res){
-    let item = req.body.newItem.trim();
-    if(req.body.list === "Work"){
-      if(item!=="")
-      {
-        workItems.push(item);
-      }
-
-      res.redirect("/work");
+app.post("/", function (req, res) {
+  const itemName = req.body.newItem.trim();
+  if (req.body.list === "Work") {
+    if (itemName !== "") {
+      workItems.push({ name: itemName, completed: false });
     }
-    else{
-      if(item!==""){
-        items.push(item);
-      }
-      res.redirect("/");
+    res.redirect("/work");
+  } else {
+    if (itemName !== "") {
+      items.push({ name: itemName, completed: false });
     }
-
-});
-  
-
-app.get("/work", function(req,res){
-  res.render("list", {listTitle: "Work List", newListItems: workItems})
-});
-
-app.post("/work", function(req, res){
-  let item = req.body.newItem;
-  if(item!==""){
-      workItems.push(item);
+    res.redirect("/");
   }
-
-  res.redirect("/work");
 });
 
+app.post("/toggle", function (req, res) {
+  const { listType, index } = req.body;
+  const idx = parseInt(index);
 
-app.get("/about", function(req, res){
-  res.render("about");
-})
+  if (listType === "Work") {
+    workItems[idx].completed = !workItems[idx].completed;
+    res.redirect("/work");
+  } else {
+    items[idx].completed = !items[idx].completed;
+    res.redirect("/");
+  }
+});
+
+app.get("/work", function (req, res) {
+  res.render("list", { listTitle: "Work", newListItems: workItems });
+});
 
 app.listen(3000, () => {
   console.log('Server running on port 3000');
 });
+
 
