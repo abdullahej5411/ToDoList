@@ -54,9 +54,39 @@ h1 {
   border-bottom: 0;
 }
 
-input:checked+p {
-  text-decoration: line-through;
-  text-decoration-color: #A683E3;
+.item:has(.checkbox-wrapper-19 input[type=checkbox]:checked) p {
+  position: relative;
+  color: #00204a;
+  display: inline; 
+  padding-left: 40px; 
+}
+
+.item:has(.checkbox-wrapper-19 input[type=checkbox]:checked) p::after {
+  content: "";
+  position: absolute;
+  height: 2px;
+  background-color: #534172;
+  width: 0; 
+  bottom: 50%; 
+  left: 40px; 
+  transform: translateY(50%); 
+  white-space: nowrap; 
+  animation: drawLine 0.5s ease-out forwards;
+}
+
+.item:has(.checkbox-wrapper-19 input[type=checkbox]:checked) p::after {
+  width: auto; 
+  display: inline-block; 
+  max-width: calc(100% - 40px);
+}
+
+@keyframes drawLine {
+  from {
+    width: 0; 
+  }
+  to {
+    width: 100%;
+  }
 }
 
 input[type="checkbox"] {
